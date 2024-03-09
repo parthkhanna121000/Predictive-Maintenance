@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Popup Button and Sticky Key</title>
+<style>
+  body
+  {
+    background-image: url("PMS\(14\).jpg");
+    height: 50%;
+  }
+  /* Styling for the popup */
+  .popup {  
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    display: none;
+  }
+
+  /* Animation for blinking */
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .blink {
+    animation: blink 1s infinite;
+  }
+
+  /* Positioning for popups */
+  #successPopup {
+    bottom : 120px;
+    left: 430px;
+    height: 100px;
+    width: 200px;
+    border-radius: 20%;
+    border: 2px dotted white;
+  }
+
+  #faultPopup {
+    bottom: 120px;
+    left: 140px;
+    width: 200px;
+    border-radius: 20%;
+    border: 2px dotted white;
+  }
+  .popup-1
+  {
+    text-align: center;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .popup-2
+  {
+    text-align: center;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+  } 
+  h1
+  {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    text-shadow: 5px 5px 5px red;
+    /* position: relative;
+    bottom: 0; */
+  }
+  .Current-Data
+  {
+    margin: 140px;
+  }
+</style>
+
+</head>
+<body>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <div class="Current-Data">
+    <h1>Current Data Status Result :-</h1>
+  </div>
+
+<!-- Popup message -->
+<div class="popup blink" id="successPopup">
+  <p class="popup-1">Success</p>
+</div>
+<div class="popup" id="faultPopup">
+  <p class="popup-2">Fault Detected</p>
+</div>
+
+<script>
+  // Initial setup: show both popups without blinking
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var successPopup = document.getElementById('successPopup');
+    var faultPopup = document.getElementById('faultPopup');
+
+    successPopup.style.display = 'block';
+    faultPopup.style.display = 'block';
+  });
+
+  var currentPopup = 'success'; // Track the currently displayed popup
+
+  // Function to toggle the popup between "Success" and "Fault Detected"
+  function togglePopup() {
+    var successPopup = document.getElementById('successPopup');
+    var faultPopup = document.getElementById('faultPopup');
+
+    // Stop blinking for the current popup
+    if (currentPopup === 'success') {
+      successPopup.classList.remove('blink');
+    } else {
+      faultPopup.classList.remove('blink');
+    }
+
+    // Show the selected popup and start blinking
+    if (currentPopup === 'success') {
+      faultPopup.style.display = 'block';
+      faultPopup.classList.add('blink');
+      currentPopup = 'fault';
+    } else {
+      successPopup.style.display = 'block';
+      successPopup.classList.add('blink');
+      currentPopup = 'success';
+    }
+  }
+
+  // Event listener for the 'A' key to toggle between popups
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'a' || event.key === 'A') {
+      togglePopup();
+    }
+  });
+</script>
+
+</body>
+</html>

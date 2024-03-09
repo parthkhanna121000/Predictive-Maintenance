@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-Time Serial Data</title>
+</head>
+<body>
+  <div id="data"></div>
+
+  <script>
+    const ws = new WebSocket('ws://localhost:8080'); // WebSocket server address
+
+    ws.onmessage = function(event) {
+      const dataDiv = document.getElementById('data');
+      dataDiv.innerHTML = event.data; // Display received data
+    };
+  </script>
+</body>
+</html>
